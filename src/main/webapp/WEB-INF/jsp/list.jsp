@@ -48,7 +48,26 @@
                 <div class="row flex-row">
 
                     <div class="col-12">
-
+                        <c:url value="/user/edit" var="edit">
+                            <c:param name="id" value="${user.id}"/>
+                            <c:param name="fromPage" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+                        <c:url value="/user/delete" var="delete">
+                            <c:param name="id" value="${user.id}"/>
+                            <c:param name="fromPage" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+                        <c:url value="/user/list" var="returna">
+                            <c:param name="page" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
                         <table class="table-hover table bg-white">
                             <div class="text-center bg-gray-100 text-primary p-2">
                                 <h4 class="p-0 m-0"><b>
@@ -74,16 +93,31 @@
                             </thead>
 
                             <c:forEach var="user" items="${list}"> <!-- listowanie użytkowników-->
+                                <c:url value="/user/show" var="show">
+                                    <c:param name="id" value="${user.id}"/>
+                                    <c:param name="fromPage" value="${param.page}"/>
+                                    <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                        <c:param name="search" value="${param.search}"/>
+                                    </c:if>
+                                </c:url>
+                                <c:url value="/user/edit" var="edit">
+                                    <c:param name="id" value="${user.id}"/>
+                                    <c:param name="fromPage" value="${param.page}"/>
+                                    <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                        <c:param name="search" value="${param.search}"/>
+                                    </c:if>
+                                </c:url>
+
                                 <tr>
                                     <td>${user.id}</td>
                                     <td>${user.username}</td>
                                     <td>${user.email}</td>
                                     <td>
-                                        <button onclick="window.location.href='${"show?id=".concat(user.id).concat(page == null ? "" : "&fromPage=".concat(page)).concat(param.search == null || param.search.trim().isEmpty() ? "" : "&search=".concat(param.search))}'"
+                                        <button onclick="window.location.href='${show}'"
                                                 class="btn-primary"><i
                                                 class="fas fa-search"></i> wyświetl
                                         </button>
-                                        <button onclick="window.location.href='${"edit?id=".concat(user.id).concat(page == null ? "" : "&fromPage=".concat(page)).concat(param.search == null || param.search.trim().isEmpty() ? "" : "&search=".concat(param.search))}'"
+                                        <button onclick="window.location.href='${edit}'"
                                                 class="btn-primary"><i
                                                 class="fas fa-pen"></i> edytuj
                                         </button>
@@ -170,13 +204,17 @@
                         Dodaj użytkownika
                     </button>
 
-
                 </div>
                 <!-- /button List -->
 
-
                 <c:forEach var="user" items="${list}">
-
+                    <c:url value="/user/delete" var="delete">
+                        <c:param name="id" value="${user.id}"/>
+                        <c:param name="fromPage" value="${param.page}"/>
+                        <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                            <c:param name="search" value="${param.search}"/>
+                        </c:if>
+                    </c:url>
                     <!-- Modal -->
                     <div class="modal fade" id="${"deleteModal".concat(user.id)}" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -187,7 +225,7 @@
                                     <h5>Czy na pewno chcesz usunąć użytkownika o id ${user.id}?</h5>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-around">
-                                    <button onclick="window.location.href='${"delete?id=".concat(user.id).concat(param.fromPage == null ? "" : "&fromPage=".concat(param.fromPage)).concat((param.search == null || param.search.trim().isEmpty()) ? "" : "&search=".concat(param.search))}'"
+                                    <button onclick="window.location.href='${delete}'"
                                             type="button" class="btn btn-primary btn-lg" style="min-width: 10vw">Tak
                                     </button>
                                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"
@@ -199,7 +237,6 @@
                     </div>
 
                 </c:forEach>
-
 
             </div>
             <!-- /.container-fluid -->

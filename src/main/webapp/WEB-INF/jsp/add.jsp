@@ -50,7 +50,19 @@
                     <div class="col-3"></div>
 
                     <div class="col-6">
-                        <form class="form-group" action="${"add".concat("?fromPage=".concat(param.fromPage)).concat(param.search == null || param.search.trim().isEmpty() ? "" : "&search=".concat(param.search))}" method="post">
+                        <c:url value="/user/add" var="addSubmit">
+                            <c:param name="fromPage" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+                        <c:url value="/user/list" var="returna">
+                            <c:param name="page" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+                        <form class="form-group" action="${addSubmit}" method="post">
                             <table class="table-hover table bg-white">
                                 <div class="text-center bg-gray-100 text-primary p-2" style="width: 100%">
                                     <h4 class="p-0 m-0"><b>Dodaj użytkownika</b></h4>
@@ -109,9 +121,9 @@
 
                     <div class="col-3"></div>
                     <div class="col-6">
-                    <button type="button" onclick="window.location.href='${"list".concat("?page=".concat(param.fromPage)).concat(param.search == null || param.search.trim().isEmpty() ? "" : "&search=".concat(param.search))}'" class="btn-primary btn-lg m-4" style="min-width: 10vw"><i
+                    <button type="button" onclick="window.location.href='${returna}'" class="btn-primary btn-lg m-4" style="min-width: 10vw"><i
                                 class="fas fa-arrow-circle-left"></i>&nbsp&nbsp&nbsp
-                            Powrót
+                        Powrót
                         </button>
 
                     <button type="submit" class="btn-primary btn-lg m-4" style="min-width: 10vw"><i class="fas fa-plus-circle"></i>&nbsp&nbsp&nbsp

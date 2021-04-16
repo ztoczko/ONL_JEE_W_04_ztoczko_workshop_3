@@ -67,7 +67,7 @@ public class Add extends HttpServlet {
                 fromPage = "1";
             }
             String search = request.getParameter("search");
-            response.sendRedirect("/user/list?page=" + URLEncoder.encode(fromPage) + (search != null ? "&search=" + URLEncoder.encode(search) : "") + "&msg=" + msg);
+            response.sendRedirect("/user/list?page=" + URLEncoder.encode(fromPage) + (search != null ? "&search=" + URLEncoder.encode(search, "UTF-8") : "") + "&msg=" + msg);
         } else {
             request.setAttribute("error", error);     //do value w widoku
             request.setAttribute("name", name);

@@ -68,7 +68,7 @@ public class AdminSettings extends HttpServlet {
                 fromPage = "1";
             }
             String search = request.getParameter("search");
-            response.sendRedirect("/user/list?page=" + URLEncoder.encode(fromPage) + (search != null ? "&search=" + URLEncoder.encode(search) : "") + "&msg=" + msg);
+            response.sendRedirect("/user/list?page=" + URLEncoder.encode(fromPage) + (search != null ? "&search=" + URLEncoder.encode(search, "UTF-8") : "") + "&msg=" + msg);
         } else {
             request.setAttribute("admin", admin);
             request.setAttribute("error", error);     //do value w widoku

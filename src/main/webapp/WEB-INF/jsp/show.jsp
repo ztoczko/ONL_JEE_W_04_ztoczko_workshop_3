@@ -49,6 +49,28 @@
                     <!-- Content Column -->
                     <div class="col-3"></div>
                     <div class="col-6">
+
+                        <c:url value="/user/edit" var="edit">
+                            <c:param name="id" value="${user.id}"/>
+                            <c:param name="fromPage" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+                        <c:url value="/user/delete" var="delete">
+                            <c:param name="id" value="${user.id}"/>
+                            <c:param name="fromPage" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+                        <c:url value="/user/list" var="returna">
+                            <c:param name="page" value="${param.fromPage}"/>
+                            <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                <c:param name="search" value="${param.search}"/>
+                            </c:if>
+                        </c:url>
+
                         <table class="table-hover table bg-white">
                             <div class="text-center bg-gray-100 text-primary p-2" style="width: 100%">
                                 <h4 class="p-0 m-0"><b>Szczegóły użytkownika</b></h4>
@@ -76,12 +98,12 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button"
-                                onclick="window.location.href='${"list".concat("?page=".concat(param.fromPage)).concat(param.search == null || param.search.trim().isEmpty() ? "" : "&search=".concat(param.search))}'"
+                                onclick="window.location.href='${returna}'"
                                 class="btn-primary btn-lg m-4" style="min-width: 10vw"><i
                                 class="fas fa-arrow-circle-left"></i>&nbsp&nbsp&nbsp
                             Powrót
                         </button>
-                        <button onclick="window.location.href='${"edit?id=".concat(user.id).concat(param.fromPage == null ? "" : "&fromPage=".concat(param.fromPage)).concat((param.search == null || param.search.trim().isEmpty()) ? "" : "&search=".concat(param.search))}'"
+                        <button onclick="window.location.href='${edit}'"
                                 class="btn-primary btn-lg m-4" style="min-width: 10vw"><i
                                 class="fas fa-pen"></i> Edytuj
                         </button>
@@ -101,7 +123,7 @@
                                     <h5>Czy na pewno chcesz usunąć użytkownika o id ${user.id}?</h5>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-around">
-                                    <button onclick="window.location.href='${"delete?id=".concat(user.id).concat(param.fromPage == null ? "" : "&fromPage=".concat(param.fromPage)).concat((param.search == null || param.search.trim().isEmpty()) ? "" : "&search=".concat(param.search))}'"
+                                    <button onclick="window.location.href='${delete}'"
                                             type="button" class="btn btn-primary btn-lg" style="min-width: 10vw">Tak
                                     </button>
                                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"

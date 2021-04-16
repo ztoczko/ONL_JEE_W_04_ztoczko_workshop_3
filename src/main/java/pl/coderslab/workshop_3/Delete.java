@@ -17,10 +17,10 @@ public class Delete extends HttpServlet {
 
         if (id == null || !id.matches("\\d+") || UserDAO.read(Integer.parseInt(id)) == null) {
 
-            response.sendRedirect("/user/list?page=" + URLEncoder.encode(page) + (search != null ? "&search=" + URLEncoder.encode(search) : "") + "&msg=deleteIdInvalid");
+            response.sendRedirect("/user/list?page=" + URLEncoder.encode(page) + (search != null ? "&search=" + URLEncoder.encode(search, "UTF-8") : "") + "&msg=deleteIdInvalid");
         } else {
             String msg = UserDAO.delete(Integer.parseInt(id)) ? "deleteSuccess" : "deleteFail";
-            response.sendRedirect("/user/list?page=" + URLEncoder.encode(page) + (search != null ? "&search=" + URLEncoder.encode(search) : "") + "&msg=" + msg);
+            response.sendRedirect("/user/list?page=" + URLEncoder.encode(page) + (search != null ? "&search=" + URLEncoder.encode(search, "UTF-8") : "") + "&msg=" + msg);
         }
 
     }

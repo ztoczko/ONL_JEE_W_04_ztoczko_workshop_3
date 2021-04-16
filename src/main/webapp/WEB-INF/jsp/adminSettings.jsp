@@ -51,9 +51,20 @@
 
                     <div class="col-6">
                         <%--                        <c:set var="action" value="${\"edit\".concat.\"?id=\".concat(param.id).concat.("&fromPage=").concat(param.fromPage).concat((param.search == null || param.search.trim().isEmpty()) ? "" : "&search=".concat(param.search))}"--%>
-
+                            <c:url value="/user/adminSettings" var="adminSubmit">
+                                <c:param name="fromPage" value="${param.fromPage}"/>
+                                <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                    <c:param name="search" value="${param.search}"/>
+                                </c:if>
+                            </c:url>
+                            <c:url value="/user/list" var="returna">
+                                <c:param name="page" value="${param.fromPage}"/>
+                                <c:if test="${param.search != null && !param.search.trim().isEmpty()}">
+                                    <c:param name="search" value="${param.search}"/>
+                                </c:if>
+                            </c:url>
                         <form class="form-group"
-                              action="${"adminSettings".concat("?fromPage=").concat(param.fromPage).concat((param.search == null || param.search.trim().isEmpty()) ? "" : "&search=".concat(param.search))}"
+                              action="${adminSubmit}"
                               method="post">
                             <table class="table-hover table bg-white">
                                 <div class="text-center bg-gray-100 text-primary p-2" style="width: 100%">
@@ -118,7 +129,7 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button"
-                                onclick="window.location.href='${"list".concat("?page=".concat(param.fromPage)).concat(param.search == null || param.search.trim().isEmpty() ? "" : "&search=".concat(param.search))}'"
+                                onclick="window.location.href='${returna}'"
                                 class="btn-primary btn-lg m-4" style="min-width: 10vw"><i
                                 class="fas fa-arrow-circle-left"></i>&nbsp&nbsp&nbsp
                             Powrót

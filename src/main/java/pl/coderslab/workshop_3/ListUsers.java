@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @WebServlet(name = "ListUsers", value = "/user/list")
 public class ListUsers extends HttpServlet {
@@ -19,7 +20,7 @@ public class ListUsers extends HttpServlet {
 
         resultCount = (search == null || search.trim().isEmpty()) ? UserDAO.getCount() : UserDAO.getCount(search);
 
-        if (pageStr == null || !pageStr.matches("[1-9][0-9]*") || Integer.parseInt(pageStr) > ((resultCount + 1) / 10 + 1)) {
+        if (pageStr == null || !pageStr.matches("[1-9][0-9]*") || Integer.parseInt(pageStr) > ((resultCount - 1) / 10 + 1)) {
             page = 1;
         } else {
             page = Integer.parseInt(pageStr);
@@ -39,6 +40,10 @@ public class ListUsers extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String search = request.getParameter("search");
+        response.sendRedirect("/user/list" + (search != null && !search.trim().isEmpty() ? "?search=" + URLEncoder.encode(search, "UTF-8") : ""));
+
 
     }
 }

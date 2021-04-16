@@ -18,7 +18,7 @@ public class Show extends HttpServlet {
             }
             String search = request.getParameter("search");
 
-            response.sendRedirect("/user/list?page=" + URLEncoder.encode(page) + (search != null ? "&search=" + URLEncoder.encode(search) : "") + "&msg=showIdInvalid");
+            response.sendRedirect("/user/list?page=" + URLEncoder.encode(page) + (search != null ? "&search=" + URLEncoder.encode(search, "UTF-8") : "") + "&msg=showIdInvalid");
         } else {
             request.setAttribute("user", UserDAO.read(Integer.parseInt(id)));
             getServletContext().getRequestDispatcher("/WEB-INF/jsp/show.jsp").forward(request, response);
