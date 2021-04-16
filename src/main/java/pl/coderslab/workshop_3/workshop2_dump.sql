@@ -15,3 +15,5 @@ CREATE TABLE admins (
                        username VARCHAR(255) UNIQUE NOT NULL,
                        password VARCHAR(60) NOT NULL
 );
+
+INSERT INTO admins VALUES ('admin@admin.pl', 'admin', '$2a$10$J018nhvCD9A71LSuStjmqOkXD10//.N1H7vR2lsSoYzQTY7zPXDpe');
