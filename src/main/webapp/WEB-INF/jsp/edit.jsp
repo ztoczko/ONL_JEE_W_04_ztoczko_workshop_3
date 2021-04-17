@@ -121,6 +121,11 @@
                                         </c:if>
                                     </td>
                                 </tr>
+                            <div>
+                                <input style="display: none" type="text" name="id" value="${param.id}";
+                                <input style="display: none" type="text" name="search" value="${param.search}";
+                                <input style="display: none" type="text" name="fromPage" value="${param.fromPage}";
+                            </div>
 
                             </table>
 

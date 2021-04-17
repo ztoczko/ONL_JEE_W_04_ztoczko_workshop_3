@@ -38,7 +38,9 @@ public class Edit extends HttpServlet {
         boolean isEmailEdited = (email == null || email.trim().isEmpty()) ? false : true;
         boolean isPasswordEdited = ((password1 == null || password1.trim().isEmpty()) && (password2 == null || password2.trim().isEmpty())) ? false : true;
         User user = isIdValid ? UserDAO.read(Integer.parseInt(id)) : null;
-
+        System.out.println(user);
+        System.out.println(id);
+        System.out.println(isIdValid);
         String error = new String();
 
         if (isNameEdited && !name.trim().matches("[a-zA-ZĄ-ćęĘŁ-ńÓóŚśŹ-ż][a-zA-ZĄ-ćęĘŁ-ńÓóŚśŹ-ż0-9\\-_]{2,253}[a-zA-ZĄ-ćęĘŁ-ńÓóŚśŹ-ż0-9]")) {
