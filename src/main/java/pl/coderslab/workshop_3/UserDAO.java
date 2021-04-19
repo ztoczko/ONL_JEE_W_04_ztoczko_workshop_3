@@ -19,7 +19,7 @@ public class UserDAO {
     private static final String COUNT_MATCHING = "SELECT COUNT(*) FROM users WHERE email LIKE CONCAT('%', ?, '%') OR username LIKE CONCAT('%', ?, '%')";
     private static final String READ_ADMIN = "SELECT * FROM admins WHERE username = ?";
     private static final String UPDATE_ADMIN = "UPDATE admins SET email = ?, username = ?, password = ? WHERE username = ?";
-    private static DBUtil dBUtil = new DBUtil("mysql://localhost:3306", "root", "coderslab", "workshop2");
+    private static DBUtil dBUtil = new DBUtil("mysql://remotemysql.com:3306", "TraDU2ybRx", "q9FIzRp9bp", "TraDU2ybRx");
 
 
     public static void create(User user) {
